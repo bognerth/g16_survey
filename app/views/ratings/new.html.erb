@@ -1,0 +1,26 @@
+
+<ul class="pricing-table">
+  <li class="title">Evaluation des Kurses: <%= $redis.get "lecture_#{current_lecture}" %></li>
+</ul>
+
+<%= form_tag({controller: "ratings", action: "create"}) do %>
+  <%= hidden_field_tag "page_id", @rating.page_id %>
+  <%= hidden_field_tag "user_id", current_user.id %>
+  <%= hidden_field_tag "lecture_id", current_lecture %>
+  <dl class="accordion" data-accordion>
+    <% @questions.each do |q| %>
+      <dd>
+        <a href="#panel_<%= q.id %>"><%= q.content %></a>
+        <div id="panel_<%= q.id %>" class="content">
+          <% q.answers.each do |answer| %>
+            <%= q.id %> - <%= answer.id %> <%= radio_button_tag "questions[#{q.id}]", answer.id %>&nbsp;&nbsp;
+            <%= answer.content %><br />
+          <% end %>
+        </div>
+      </dd>
+    <% end %>
+  </dl>
+  <div class="custom-panel callout radius">
+  <%= submit_tag "Bewerten" %>
+</div>
+<% end %>

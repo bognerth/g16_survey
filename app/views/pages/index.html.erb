@@ -1,0 +1,34 @@
+<h3>Liste der Umfragen</h3>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Lecture</th>
+    <th>Period</th>
+    <th></th>
+    <% if current_user.admin? %>
+        <th></th>
+        <th></th>
+        <th></th>
+    <% end %>
+  </tr>
+
+<% @pages.each do |page| %>
+  <tr>
+    <td><%= page.title %></td>
+    <td><%= $redis.get "lecture_#{page.lecture_id}" %></td>
+    <td><%= page.period %></td>
+    <td><%= link_to raw("<i class='fi-list dark-green icon-normal'></i>"), new_rating_path(page_id: page.id), :title => "Teilnehmen" %></td>
+    <% if current_user.admin? %>
+        <td><%= link_to raw("<i class='fi-pencil dark-blue icon-normal'></i>"), edit_page_path(page), :title => 'Bearbeiten' %></td>
+        <td><%= link_to raw("<i class='fi-trash dark-red icon-normal'></i>"), page, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'Loeschen' %></td>
+        <td><%= link_to raw("<i class='fi-results-demographics dark-blue icon-normal'></i>"), page_path(page), :title => 'Ergebnisse' %></td>
+        <td><%= link_to raw("<i class='fi-page-pdf dark-blue icon-normal'></i>"), page_path(page, format: "pdf"), :title => 'Ergebnisse' %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Page', new_page_path %>

@@ -1,0 +1,18 @@
+<%= simple_form_for(@page) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.input :description %>
+    <%= f.input :lecture, collection: $redis.lrange(:course_lectures, 0, -1), prompt: "Fach wählen" %>
+    <%= f.input :period, collection: $redis.lrange(:periods, 0, -1), prompt: "Schulhalbjahr wählen" %>
+    <%= f.input :period_start, :as => :datepicker %>
+    <%= f.input :period_end, :as => :datepicker %>
+    <%= f.input :day_of_week, collection: $redis.lrange(:weekdays, 0, -1),prompt: "Wochentag wählen" %>
+    <%= f.input :presentations_per_day %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

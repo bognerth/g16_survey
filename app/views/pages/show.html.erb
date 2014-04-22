@@ -1,0 +1,19 @@
+<ul class="pricing-table">
+  <li class="title">Evaluation des Kurses</li>
+  <li class="bullet-item"><%= $redis.get "lecture_#{current_lecture}" %></li>
+  <li class="bullet-item"><%= @page.period %></li>
+  <li class="bullet-item">am: <%= @ratings.first.created_at %></li>
+  <li class="bullet-item">Abgegebene Bewertungen: <%= @ratings.count %></li>
+</ul>
+
+
+<% @ratings.each do |rating| %>
+  <% if rating.question %>
+    <dl>
+      <dt><%= rating.question.content  %></dt>
+      <% rating.question.answers.each do |answer| %>
+        <dd><%= answer.ratings.count || 0 %> x <%= answer.content %></dd>
+      <% end %>
+    </dl>
+  <% end %>
+<% end %>

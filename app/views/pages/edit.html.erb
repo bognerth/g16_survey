@@ -1,0 +1,12 @@
+<h1>Editing page</h1>
+
+<%= render 'form' %>
+
+<%= link_to raw("<i class='fi-arrow-left icon-big'></i>"), pages_path, title: "Zurueck" %> 
+ <i class='fi-social-joomla trenner-icon'></i> 
+<%= link_to raw("<i class='fi-results-demographics dark-blue icon-big'></i>"), setdays_day_path(@page.id), :title => "Tage erneut einlesen" %>  
+ <i class='fi-social-joomla trenner-icon'></i> 
+<%= link_to raw("<i class='fi-trash dark-blue icon-big'></i>"), destroydays_day_path(@page.id), method: :delete, data: { confirm: 'Are you sure?' }, :title => "Tage loeschen" %> 
+ <i class='fi-social-joomla trenner-icon'></i> 
+<%= link_to raw("<i class='fi-eye dark-blue icon-big'></i>"), @page, title: "Anzeigen" %> 
+

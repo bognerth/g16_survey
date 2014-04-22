@@ -1,0 +1,37 @@
+
+        <nav class="top-bar" data-topbar >
+          <ul class="title-area">
+            <li class="name">
+              <h1><%= link_to 'G16', root_path %></h1>
+            </li>
+            <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li> 
+          </ul>
+
+          <section class="top-bar-section">
+            <!-- Right Nav Section -->
+            <ul class="right">
+              <li class="active"><a href="#"></a></li>
+            </ul>
+
+            <!-- Left Nav Section -->
+            <% if current_user.admin? %> 
+              <ul class="left">
+                <li class="has-dropdown">
+                  <a href="#">Lectures</a>
+                  <ul class="dropdown">
+                    <% Page.order(:title).each do |page| %>
+                      <li><%= link_to page.title, page_path(page.id) %></li>
+                    <% end %>
+                  </ul>
+                </li>              </ul>
+            <% else %>
+              <ul class="left">
+ 
+              </ul>
+
+            <% end %>
+            <ul class="right">
+              <li class="active"><%= link_to "Zur Übersicht", root_path %></li>
+            </ul>
+          </section>
+        </nav>

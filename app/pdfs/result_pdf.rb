@@ -10,7 +10,7 @@ class ResultPdf < Prawn::Document
     
   end
   def header
-    text "Umfrageergebnis:#{@page.title}", size: 30, style: :bold
+    text "Umfrageergebnis:#{@page.title}", size: 20, style: :bold
     move_down @abstand_normal
     text @page.period
     move_down @abstand_normal
